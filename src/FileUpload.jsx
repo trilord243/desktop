@@ -2,12 +2,15 @@ import React, {useContext, useState} from 'react';
 import axios from 'axios';
 import TokenContext from "./context/TokenProvider.jsx";
 import { BarcodeComponent} from "./Barcode.jsx";
+import {redirect, useNavigate, useParams} from "react-router-dom";
 
 const FileUpload = () => {
     const { token, setToken } = useContext(TokenContext);
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
     const [uploadPath, setUploadPath] = useState(''); // Nuevo estado para la carpeta de destino
+    let {name}=useParams()
+    const navigate = useNavigate()
 
     const onFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -38,6 +41,7 @@ const FileUpload = () => {
 
             setMessage('Archivo subido con éxito');
             setToken(response.data.fileName); // Guardar el nombre del archivo devuelto por el servidor
+            navigate('/download/' + name, { replace: true });
         } catch (error) {
             console.error('Error subiendo el archivo', error);
             setMessage('Error subiendo el archivo');
@@ -54,14 +58,9 @@ const FileUpload = () => {
                 onChange={onPathChange}
             />
             <input type="file" onChange={onFileChange} />
-            <button onClick={onFileUpload}>Subir</button>
+            <button className='bg-indigo-500 p-3 rounded-2xl hover:bg-indigo-700' onClick={onFileUpload}>Subir</button>
             {message && <p>{message}</p>}
-            {token && (
-                <div>
-                    <p>Token del archivo: {token}</p>
-                    <BarcodeComponent/>
-                </div>
-            )}
+
         </div>
     );
 };
