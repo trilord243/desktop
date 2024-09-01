@@ -1,4 +1,4 @@
-import {Form, redirect} from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
 
 export default function RegisterName() {
     return (
@@ -28,7 +28,7 @@ export default function RegisterName() {
                             Ir a subir archivo
                         </button>
                     </div>
-                 {/*   <p className="mt-4 text-sm leading-6 text-gray-900">
+                    {/*   <p className="mt-4 text-sm leading-6 text-gray-900">
                         We care about your data. Read our{' '}
                         <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                             privacy&nbsp;policy
@@ -41,10 +41,10 @@ export default function RegisterName() {
     )
 }
 
-export async function action({request, context}){
-    const formData= await  request.formData();
+export async function action({ request, context }) {
+    const formData = await request.formData();
 
     const name = formData.get('name')
-    return redirect("ip/"+name)
+    return redirect("upload/" + name)
 
 }

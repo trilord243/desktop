@@ -1,15 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import TokenContext from "./context/TokenProvider.jsx";
-import { BarcodeComponent} from "./Barcode.jsx";
-import {redirect, useNavigate, useParams} from "react-router-dom";
+import { BarcodeComponent } from "./Barcode.jsx";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 
 const FileUpload = () => {
     const { token, setToken } = useContext(TokenContext);
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
     const [uploadPath, setUploadPath] = useState(''); // Nuevo estado para la carpeta de destino
-    let {name}=useParams()
+    let { name } = useParams()
     const navigate = useNavigate()
 
     const onFileChange = (event) => {
@@ -33,7 +33,7 @@ const FileUpload = () => {
 
         try {
             console.log(formData)
-            const response = await axios.post('http://localhost:3000/upload', formData, {
+            const response = await axios.post('https://secure-island-46662-cd8fbd3886e4.herokuapp.com/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

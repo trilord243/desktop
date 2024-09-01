@@ -1,13 +1,13 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import {BarcodeComponent} from "./Barcode.jsx";
+import { BarcodeComponent } from "./Barcode.jsx";
 import TokenContext from "./context/TokenProvider.jsx";
 
 const FileDownload = ({ fileName }) => {
-    const {token}= useContext(TokenContext);
+    const { token } = useContext(TokenContext);
     const handleDownload = () => {
         axios({
-            url: `http://localhost:3000/download/${fileName}`, // Cambia esta URL si es necesario
+            url: `https://secure-island-46662-cd8fbd3886e4.herokuapp.com/download/${fileName}`, // Cambia esta URL si es necesario
             method: 'GET',
             responseType: 'blob', // Importante para manejar la respuesta como un archivo
         })
@@ -31,12 +31,12 @@ const FileDownload = ({ fileName }) => {
             {token && (
                 <div>
                     <p>Token del archivo: {token}</p>
-                    <BarcodeComponent/>
+                    <BarcodeComponent />
                 </div>
             )}
-        <button onClick={handleDownload}>
-            Descargar Archivo
-        </button>
+            <button onClick={handleDownload}>
+                Descargar Archivo
+            </button>
         </>
     );
 };
