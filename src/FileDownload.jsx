@@ -4,10 +4,13 @@ import { BarcodeComponent } from "./Barcode.jsx";
 import TokenContext from "./context/TokenProvider.jsx";
 
 const FileDownload = ({ fileName }) => {
+    const link = `https://secure-island-46662-cd8fbd3886e4.herokuapp.com/download/${fileName}`;
+    const linkLocal = `http://localhost:3000/download/${fileName}`;
+
     const { token } = useContext(TokenContext);
     const handleDownload = () => {
         axios({
-            url: `https://secure-island-46662-cd8fbd3886e4.herokuapp.com/download/${fileName}`, // Cambia esta URL si es necesario
+            url: link, // Cambia esta URL si es necesario
             method: 'GET',
             responseType: 'blob', // Importante para manejar la respuesta como un archivo
         })

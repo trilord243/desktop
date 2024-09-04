@@ -5,6 +5,8 @@ import { BarcodeComponent } from "./Barcode.jsx";
 import { redirect, useNavigate, useParams } from "react-router-dom";
 
 const FileUpload = () => {
+    const link= 'https://secure-island-46662-cd8fbd3886e4.herokuapp.com/upload'
+    const linkLocal= 'http://localhost:3000/upload'
     const { token, setToken } = useContext(TokenContext);
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
@@ -33,7 +35,7 @@ const FileUpload = () => {
 
         try {
             console.log(formData)
-            const response = await axios.post('https://secure-island-46662-cd8fbd3886e4.herokuapp.com/upload', formData, {
+            const response = await axios.post(link, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
